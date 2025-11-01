@@ -11,7 +11,7 @@ public class ListToDoQueryHandler(IAppDbContext _context) : IRequestHandler<List
         {
             query = query.Where(x => x.ToDoDate.Date == request.Pagination.ToDoDate.Value.Date);
         }
-
+        query = query.OrderByDescending(x => x.ToDoDate);
         return await PaginatedResult<ToDoItemDto>.Create(query.ToDtos(), request.Pagination.PageNumber, request.Pagination.PageSize, cancellationToken);
     }
 }

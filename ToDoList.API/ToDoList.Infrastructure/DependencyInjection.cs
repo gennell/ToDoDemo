@@ -12,6 +12,7 @@ namespace ToDoList.Infrastructure
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IAppDbContext, AppDbContext>();
+
             return services;
         }
     }
