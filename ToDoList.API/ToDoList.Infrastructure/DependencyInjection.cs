@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ToDoList.Application.Interfaces;
 using ToDoList.Infrastructure.Data;
 
 namespace ToDoList.Infrastructure
@@ -10,6 +11,7 @@ namespace ToDoList.Infrastructure
         {
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IAppDbContext, AppDbContext>();
             return services;
         }
     }
