@@ -21,7 +21,7 @@ showToDoItemForm = signal(false);
 filterDate = signal<string>('');
 totalCount = signal(0);
 totalPages = signal(0);
-pageNumber = signal(1);
+pageNumber = signal(0);
 
 onFilterDateChange(date: string) {
   this.filterDate.set(date);
@@ -32,6 +32,12 @@ onFilterDateChange(date: string) {
 clearFilter() {
   this.filterDate.set('');
   this.pageNumber.set(1);
+  this.loadToDoItems();
+}
+
+onPageChange(page: number) {
+  this.pageNumber.set(page);
+  this.toDoItemsParams.set({ ...this.toDoItemsParams(), pageNumber: page });
   this.loadToDoItems();
 }
 

@@ -4,6 +4,7 @@ using ToDoList.Application.Interfaces;
 using ToDoList.Application.Services;
 using ToDoList.Infrastructure.Data;
 using ToDoList.Infrastructure.Email;
+using ToDoList.Infrastructure.Interceptors;
 
 namespace ToDoList.Infrastructure
 {
@@ -12,7 +13,9 @@ namespace ToDoList.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlite(configuration.GetConnectionString("DefaultConnection"))
+                .AddInterceptors(new SaveChangesEntityInterceptor()));
+
             services.AddScoped<IAppDbContext, AppDbContext>();
 
             // Email configuration

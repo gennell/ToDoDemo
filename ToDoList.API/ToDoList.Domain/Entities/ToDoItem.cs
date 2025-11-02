@@ -14,6 +14,7 @@ namespace ToDoList.Domain.Entities
 
         public static ToDoItem Create(string title, string? description, DateTime toDoDate, ToDoStatus status, string assignedEmail)
         {
+            Validate(title, description, toDoDate, status, assignedEmail);
             return new ToDoItem
             {
                 Title = title,
@@ -26,12 +27,22 @@ namespace ToDoList.Domain.Entities
 
         public void Update(string title, string? description, DateTime toDoDate, ToDoStatus status, string assignedEmail, bool notifySended = false)
         {
+            Validate(title, description, toDoDate, status, assignedEmail);
             Title = title;
             Description = description;
             ToDoDate = toDoDate;
             Status = status;
             AssignedEmail = assignedEmail;
             NotifySended = notifySended;
+        }
+        private static void Validate(string title, string? description, DateTime toDoDate, ToDoStatus status, string assignedEmail)
+        {
+            ArgumentException.ThrowIfNullOrEmpty(title);
+            ArgumentException.ThrowIfNullOrEmpty(assignedEmail);
+            if (toDoDate < DateTime.UtcNow)
+            {
+                throw new ArgumentException("ToDoDate cannot be in the past");
+            }
         }
     }
 }

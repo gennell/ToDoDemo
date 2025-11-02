@@ -61,6 +61,24 @@
         <span>Nie znaleziono zadań</span>
     </div>
     }
+
+    @if (totalPages() > 1) {
+    <div class="flex justify-center items-center gap-4 mt-6">
+        <button class="btn btn-outline" (click)="onPageChange(pageNumber() - 1)" [disabled]="pageNumber() === 0">
+            Previous
+        </button>
+
+        <span class="text-sm font-medium text-gray-600">
+            Page {{ pageNumber() + 1 }} of {{ totalPages() }}
+        </span>
+
+        <button class="btn btn-outline" (click)="onPageChange(pageNumber() + 1)"
+            [disabled]="pageNumber() === totalPages() - 1">
+            Next
+        </button>
+    </div>
+    }
+
 </div>
 @if (showToDoItemForm()) {
 <app-todo-form [toDoItem]="selectedToDoItem()" (close)="closeToDoItemForm()"></app-todo-form>
