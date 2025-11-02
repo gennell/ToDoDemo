@@ -32,3 +32,7 @@ _ReSharper*/
 #Nuget packages folder
 packages/
 *.db*
+/ToDoList.API/client/.cursor/*
+/ToDoList.API/client/.vscode/extensions.json
+/ToDoList.API/client/.vscode/launch.json
+/ToDoList.API/client/.vscode/tasks.json

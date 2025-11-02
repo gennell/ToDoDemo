@@ -6,7 +6,13 @@ public static class ToDoItemExtensions
 {
     public static ToDoItemDto ToDto(this ToDoItem toDoItem)
     {
-        return new ToDoItemDto(toDoItem.Id, toDoItem.Title, toDoItem.Description, toDoItem.ToDoDate, toDoItem.Status, toDoItem.AssignedEmail);
+        return new ToDoItemDto {
+            Id = toDoItem.Id, 
+            Title = toDoItem.Title, 
+            Description = toDoItem.Description, 
+            ToDoDate = toDoItem.ToDoDate, 
+            Status = (int)toDoItem.Status, 
+            AssignedEmail = toDoItem.AssignedEmail };
     }
     public static List<ToDoItemDto> ToDtos(this List<ToDoItem> toDoItems)
     {

@@ -10,13 +10,13 @@ namespace ToDoList.API.Controllers;
 public class ToDoItemsController(ISender _mediator) : BaseApiController
 {
     [HttpGet]
-    public async Task<IActionResult> GetToDoItems([FromQuery] PaginationRequest pagination, CancellationToken cancellationToken)
+    public async Task<ActionResult<PaginatedResult<ToDoItemDto>>> GetToDoItems([FromQuery] PaginationRequest pagination, CancellationToken cancellationToken)
     {
         var result = await _mediator.Send(new ListToDoQuery(pagination), cancellationToken);
         return Ok(result);
     }
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetToDoItemById(Guid id, CancellationToken cancellationToken)
+    public async Task<ActionResult<ToDoItemDto>> GetToDoItemById(Guid id, CancellationToken cancellationToken)
     {
         var result = await _mediator.Send(new OneToDoItemQuery(id), cancellationToken);
         if (result == null)
@@ -32,13 +32,13 @@ public class ToDoItemsController(ISender _mediator) : BaseApiController
         return CreatedAtAction(nameof(GetToDoItemById), new { id = result.Id }, result);
     }
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateToDoItem(Guid id, [FromBody] ToDoItemDto updateToDoItemDto, CancellationToken cancellationToken)
+    public async Task<ActionResult<ToDoItemDto>> UpdateToDoItem(string id, [FromBody] ToDoItemDto updateToDoItemDto, CancellationToken cancellationToken)
     {
-        if (id != updateToDoItemDto.Id)
+        if (id != updateToDoItemDto.Id.ToString())
         {
             return BadRequest();
         }
-        var result = await _mediator.Send(new UpdateToDoCommand(id, updateToDoItemDto), cancellationToken);
+        var result = await _mediator.Send(new UpdateToDoCommand(updateToDoItemDto), cancellationToken);
         return Ok(result);
     }
 }

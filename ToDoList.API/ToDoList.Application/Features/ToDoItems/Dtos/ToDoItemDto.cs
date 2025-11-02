@@ -1,3 +1,11 @@
 namespace ToDoList.Application.Features.ToDoItems.Dtos;
 
-public record ToDoItemDto(Guid Id, string Title, string Description, DateTime ToDoDate, ToDoStatus Status, string AssignedEmail);
+public class ToDoItemDto
+{
+    public Guid Id { get; set; }
+    public string Title { get; set; }
+    public string? Description { get; set; }
+    public DateTime ToDoDate { get; set; }
+    public int Status { get; set; }
+    public string AssignedEmail { get; set; }
+}

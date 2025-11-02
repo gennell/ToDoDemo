@@ -1,3 +1,10 @@
 namespace ToDoList.Application.Features.ToDoItems.Dtos;
 
-public record CreateToDoItemDto(string Title, string Description, DateTime ToDoDate, ToDoStatus Status, string AssignedEmail);
+public class CreateToDoItemDto
+{
+    public string Title { get; set; }
+    public string? Description { get; set; }
+    public DateTime ToDoDate { get; set; }
+    public int Status { get; set; }
+    public string AssignedEmail { get; set; }
+}

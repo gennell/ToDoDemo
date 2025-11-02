@@ -9,7 +9,7 @@ namespace ToDoList.Infrastructure.Data.Configurations
             builder.ToTable("ToDoItems");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Title).IsRequired().HasMaxLength(255);
-            builder.Property(x => x.Description).IsRequired().HasMaxLength(3000);
+            builder.Property(x => x.Description).HasMaxLength(3000);
             builder.Property(x => x.ToDoDate).IsRequired();
             builder.Property(x => x.Status).IsRequired();
             builder.Property(x => x.AssignedEmail).IsRequired().HasMaxLength(255);

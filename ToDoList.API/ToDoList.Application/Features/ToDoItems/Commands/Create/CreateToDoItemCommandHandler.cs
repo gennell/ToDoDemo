@@ -8,7 +8,7 @@ public class CreateToDoItemCommandHandler(IAppDbContext _context) : IRequestHand
             title: request.ToDoItem.Title,
             description: request.ToDoItem.Description,
             toDoDate: request.ToDoItem.ToDoDate,
-            status: request.ToDoItem.Status,
+            status: (ToDoStatus)request.ToDoItem.Status,
             assignedEmail: request.ToDoItem.AssignedEmail);
         await _context.ToDoItems.AddAsync(toDoItem, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);

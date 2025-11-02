@@ -1,0 +1,117 @@
+<div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50" (click)="onCancel()">
+    <div class="bg-white w-full max-w-2xl" (click)="$event.stopPropagation()">
+        <div class="flex justify-between items-center p-6 border-b border-gray-200">
+            <h2 class="text-2xl text-gray-800">{{ isEditMode ? 'Edycja zadania' : 'Nowe zadanie' }}</h2>
+        </div>
+
+        <form [formGroup]="toDoItemForm" (submit)="onSubmit()" class="p-7">
+            <div class="flex flex-col gap-2">
+                <label for="title" class="form-control w-full">
+                    <div class="label">
+                        <span class="label-text">Nazwa zadania *</span>
+                    </div>
+
+                    <input type="text" id="title" formControlName="title" class="input input-bordered w-full"
+                        [class.input-error]="toDoItemForm.get('title')?.invalid && toDoItemForm.get('title')?.touched" />
+                    @if (toDoItemForm.get('title')?.invalid && toDoItemForm.get('title')?.touched) {
+                    <div class="label">
+                        <span class="label-text-alt text-error">
+                            @if (toDoItemForm.get('title')?.errors?.['required']) {
+                            <span>Nazwa zadania jest wymagana</span>
+                            }
+                            @if (toDoItemForm.get('title')?.errors?.['maxlength']) {
+                            <span>Nazwa zadania nie może przekraczać 200 znaków</span>
+                            }
+                        </span>
+                    </div>
+                    }
+                </label>
+
+                <label for="description" class="form-control w-full">
+                    <div class="label">
+                        <span class="label-text">Opis zadania</span>
+                    </div>
+
+                    <textarea type="text" id="description" formControlName="description"
+                        class="textarea textarea-bordered w-full" rows="3"
+                        [class.textarea-error]="toDoItemForm.get('description')?.invalid && toDoItemForm.get('description')?.touched"></textarea>
+                    @if (toDoItemForm.get('description')?.invalid && toDoItemForm.get('description')?.touched) {
+                    <div class="label">
+                        <span class="label-text-alt text-error">
+                            @if (toDoItemForm.get('description')?.errors?.['required']) {
+                            <span>Opis zadania jest wymagany</span>
+                            }
+                            @if (toDoItemForm.get('description')?.errors?.['maxlength']) {
+                            <span>Opis zadania nie może przekraczać 2000 znaków</span>
+                            }
+                        </span>
+                    </div>
+                    }
+                </label>
+
+                <label for="toDoDate" class="form-control w-full">
+                    <div class="label">
+                        <span class="label-text">Termin wykonania *</span>
+                    </div>
+
+                    <input type="date" id="toDoDate" formControlName="toDoDate" class="input input-bordered w-full"
+                        placeholder="John Doe"
+                        [class.input-error]="toDoItemForm.get('toDoDate')?.invalid && toDoItemForm.get('toDoDate')?.touched" />
+
+                    @if (toDoItemForm.get('toDoDate')?.invalid && toDoItemForm.get('toDoDate')?.touched) {
+                    <div class="label">
+                        <span class="label-text-alt text-error">
+                            @if (toDoItemForm.get('toDoDate')?.errors?.['required']) {
+                            <span>Termin wykonania jest wymagany</span>
+                            }
+                        </span>
+                    </div>
+                    }
+                </label>
+
+                <label for="status" class="form-control w-full">
+                    <div class="label">
+                        <span class="label-text">Status *</span>
+                    </div>
+
+                    <select id="status" formControlName="status" class="select select-bordered w-full">
+                        @for (status of toDoItemStatuses; track status.value) {
+                        <option [value]="status.value">
+                            {{ status.label }}
+                        </option>
+                        }
+                    </select>
+                </label>
+
+                <label for="assignedEmail" class="form-control w-full">
+                    <div class="label">
+                        <span class="label-text">Przypisany do *</span>
+                    </div>
+
+                    <input type="email" id="assignedEmail" formControlName="assignedEmail"
+                        placeholder="user@example.com" class="input input-bordered input-error w-full"
+                        [class.input-error]="toDoItemForm.get('assignedEmail')?.invalid && toDoItemForm.get('assignedEmail')?.touched" />
+                    @if (toDoItemForm.get('assignedEmail')?.invalid && toDoItemForm.get('assignedEmail')?.touched) {
+                    <div class="label">
+                        <span class="label-text-alt text-error">
+                            @if (toDoItemForm.get('assignedEmail')?.errors?.['required']) {
+                            <span>Email jest wymagany</span>
+                            }
+                            @if (toDoItemForm.get('assignedEmail')?.errors?.['email']) {
+                            <span>Invalid email format</span>
+                            }
+                        </span>
+                    </div>
+                    }
+                </label>
+            </div>
+
+            <div class="flex justify-end gap-3 pt-2">
+                <button type="button" class="btn btn-ghost" (click)="onCancel()">Cancel</button>
+                <button type="submit" class="btn btn-primary" [disabled]="toDoItemForm.invalid || isSubmitting()">
+                    {{ isSubmitting() ? 'Saving...' : (isEditMode ? 'Update' : 'Create') }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

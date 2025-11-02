@@ -4,16 +4,16 @@ public class UpdateToDoCommandHandler(IAppDbContext _context) : IRequestHandler<
 {
     public async Task<ToDoItemDto> Handle(UpdateToDoCommand request, CancellationToken cancellationToken)
     {
-        var toDoItem = await _context.ToDoItems.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+        var toDoItem = await _context.ToDoItems.FirstOrDefaultAsync(x => x.Id == request.ToDoItem.Id, cancellationToken);
         if (toDoItem is null)
         {
-            throw new Exception($"Nie znaleziono zadania o id {request.Id}");
+            throw new Exception($"Nie znaleziono zadania o id {request.ToDoItem.Id}");
         }
         toDoItem.Update(
             title: request.ToDoItem.Title,
             description: request.ToDoItem.Description,
             toDoDate: request.ToDoItem.ToDoDate,
-            status: request.ToDoItem.Status,
+            status: (ToDoStatus)request.ToDoItem.Status,
             assignedEmail: request.ToDoItem.AssignedEmail);
         await _context.SaveChangesAsync(cancellationToken);
         return toDoItem.ToDto();

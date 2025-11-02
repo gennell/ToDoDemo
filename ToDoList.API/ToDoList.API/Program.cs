@@ -13,6 +13,16 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,8 +34,9 @@ if (app.Environment.IsDevelopment())
         cfg.SwaggerEndpoint("/swagger/v1/swagger.json", "ToDoList API v1");
     });
 }
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
+app.UseCors("AllowAll");
 app.UseAuthorization();
 
 app.MapControllers();
