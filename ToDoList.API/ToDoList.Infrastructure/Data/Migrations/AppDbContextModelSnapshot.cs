@@ -35,6 +35,9 @@ namespace ToDoList.Infrastructure.Data.Migrations
                         .HasMaxLength(3000)
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("NotifySended")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Status")
                         .HasColumnType("INTEGER");
 

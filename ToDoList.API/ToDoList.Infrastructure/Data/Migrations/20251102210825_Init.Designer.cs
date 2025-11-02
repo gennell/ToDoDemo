@@ -11,7 +11,7 @@ using ToDoList.Infrastructure.Data;
 namespace ToDoList.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251101185848_Init")]
+    [Migration("20251102210825_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -35,9 +35,11 @@ namespace ToDoList.Infrastructure.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(3000)
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("NotifySended")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Status")
                         .HasColumnType("INTEGER");

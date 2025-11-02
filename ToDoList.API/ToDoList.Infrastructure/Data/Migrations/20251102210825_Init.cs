@@ -17,10 +17,11 @@ namespace ToDoList.Infrastructure.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Title = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
-                    Description = table.Column<string>(type: "TEXT", maxLength: 3000, nullable: false),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 3000, nullable: true),
                     ToDoDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Status = table.Column<int>(type: "INTEGER", nullable: false),
                     AssignedEmail = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
+                    NotifySended = table.Column<bool>(type: "INTEGER", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },

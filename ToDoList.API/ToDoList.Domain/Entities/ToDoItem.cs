@@ -10,6 +10,7 @@ namespace ToDoList.Domain.Entities
         public DateTime ToDoDate { get; private set; }
         public ToDoStatus Status { get; private set; } = ToDoStatus.NotStarted;
         public string AssignedEmail { get; private set; } = string.Empty;
+        public bool NotifySended { get; private set; } = false;
 
         public static ToDoItem Create(string title, string? description, DateTime toDoDate, ToDoStatus status, string assignedEmail)
         {
@@ -23,13 +24,14 @@ namespace ToDoList.Domain.Entities
             };
         }
 
-        public void Update(string title, string? description, DateTime toDoDate, ToDoStatus status, string assignedEmail)
+        public void Update(string title, string? description, DateTime toDoDate, ToDoStatus status, string assignedEmail, bool notifySended = false)
         {
             Title = title;
             Description = description;
             ToDoDate = toDoDate;
             Status = status;
             AssignedEmail = assignedEmail;
+            NotifySended = notifySended;
         }
     }
 }
