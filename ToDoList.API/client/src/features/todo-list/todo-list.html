@@ -4,6 +4,27 @@
         <button class="btn btn-primary" (click)="openToDoItemForm()">Dodaj zadanie</button>
     </div>
 
+
+    <div class="flex justify-between items-center mb-6 p-5">
+        <div class="flex items-end gap-3">
+            <div class="flex items-center gap-3">
+                <label for="filterDate" class="form-control">
+                    <div class="label">
+                        <span class="label-text">Filtruj po dacie:</span>
+                    </div>
+
+                    <input type="date" id="filterDate" class="input input-bordered" [value]="filterDate()"
+                        (change)="onFilterDateChange($any($event.target).value)">
+                </label>
+            </div>
+            @if (filterDate())
+            {
+            <button class="btn btn-ghost" (click)="clearFilter()">Wyczyść</button>
+            }
+        </div>
+        <div class="font-medium">Łącznie: {{ totalCount() }} zadań</div>
+    </div>
+
     @if (paginatedToDoItems(); as paginatedResult) {
     <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
         <table class="table">

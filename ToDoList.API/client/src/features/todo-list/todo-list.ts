@@ -18,10 +18,29 @@ protected paginatedToDoItems = signal<PaginatedResult<ToDoItemDto> | null>(null)
 selectedToDoItem = signal<ToDoItemDto | null>(null);
 showToDoItemForm = signal(false);
 
+filterDate = signal<string>('');
+totalCount = signal(0);
+totalPages = signal(0);
+pageNumber = signal(1);
+
+onFilterDateChange(date: string) {
+  this.filterDate.set(date);
+  this.pageNumber.set(1);
+  this.loadToDoItems();
+}
+
+clearFilter() {
+  this.filterDate.set('');
+  this.pageNumber.set(1);
+  this.loadToDoItems();
+}
+
 loadToDoItems() {
-  this.todoService.getToDoItems(this.toDoItemsParams()).subscribe({
+  this.todoService.getToDoItems(this.toDoItemsParams(), this.filterDate()).subscribe({
     next: (result) => {
       this.paginatedToDoItems.set(result);
+      this.totalCount.set(result.totalItems);
+      this.totalPages.set(result.totalPages);
     },
     error: (error) => {
       console.error(error);

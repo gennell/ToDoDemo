@@ -10,12 +10,14 @@ export class TodoService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = environment.apiUrl;
 
-  getToDoItems(paginationRequest: PaginationRequest) {
+  getToDoItems(paginationRequest: PaginationRequest, filterDate: string) {
     let params = new HttpParams();
     params = params.set('pageNumber', paginationRequest.pageNumber);
     params = params.set('pageSize', paginationRequest.pageSize);
-    //params = params.set('toDoDate', paginationRequest.toDoDate?.toISOString() || '');
 
+    if (filterDate !== '') {
+      params = params.set('toDoDate', filterDate);
+    }
 
       return this.http.get<PaginatedResult<ToDoItemDto>>(`${this.baseUrl}ToDoItems`, { params });
     }
