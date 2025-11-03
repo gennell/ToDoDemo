@@ -36,3 +36,7 @@ packages/
 /ToDoList.API/client/.vscode/extensions.json
 /ToDoList.API/client/.vscode/launch.json
 /ToDoList.API/client/.vscode/tasks.json
+/.vscode/launch.json
+/.vscode/tasks.json
+/ToDoList.API/ToDoList.API/.config/dotnet-tools.json
+/ToDoList.API/ToDoList.API/wwwroot/*
