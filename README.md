@@ -1,5 +1,11 @@
 # ToDoDemo
 
+Dla uproszczenia instalacji i testowania aplikacja używa jako bazy Sqlite
+dodano mechanizm notyfikacji na dzień przed terminem.
+w interwale 1 godzinnym sprawdzane jest czy są zadania nieskończone z terminem na dzień przyszły
+dla takich zadań jest wysyłany na przypisany do zadania email.
+powiadomienie wysyłane jest raz, modyfikacja zadania powoduje ponowne wysłanie powiadomienia.
+
 Pobieramy kod ze strony github i wypakowujemy.
 
 Do zbudowania aplikacji wymagane są:
@@ -34,4 +40,9 @@ Aby ją przetestować wystarczy przejść do folderu
 
 \ToDoList.API\ToDoList.API\bin\Publish
 
-i wykonać ToDoList.API.exe
+w pliku appsettings.json w sekcji EmailSettings
+są ustawienia potrzebne do wysyłania notyfikacji na poczte email
+
+po zapisaniu ustawień należy wykonać ToDoList.API.exe
+
+aplikacja dostępna jest w przeglądarce pod adresem http://localhost:5000/
