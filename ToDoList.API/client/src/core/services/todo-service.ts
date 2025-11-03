@@ -28,16 +28,6 @@ export class TodoService {
     return this.http.post<ToDoItemDto>(`${this.baseUrl}ToDoItems`, toDoItem);
   }
   updateToDoItem(id: string, toDoItem: ToDoItemDto) {
-    console.log('test3');
-    console.log(toDoItem);
-    const toDoItemTest: ToDoItemTest = {
-      id: toDoItem.id,
-      title: toDoItem.title,
-      description: toDoItem.description,
-      assignedEmail: toDoItem.assignedEmail,
-      status: toDoItem.status,
-      toDoDate: toDoItem.toDoDate
-    };
     return this.http.put<ToDoItemDto>(`${this.baseUrl}ToDoItems/${id}`, toDoItem);
   }
 }

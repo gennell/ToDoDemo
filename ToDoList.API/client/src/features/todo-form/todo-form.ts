@@ -1,20 +1,20 @@
-import { Component, EventEmitter, inject, Input, Output, signal } from '@angular/core';
+import { Component, inject, Input, OnInit, output, signal } from '@angular/core';
 import { TodoService } from '../../core/services/todo-service';
 import { ToDoItemDto, ToDoStatus } from '../../types/todoitem';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-todo-form',
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './todo-form.html',
   styleUrl: './todo-form.css',
 })
-export class TodoForm {
+export class TodoForm implements OnInit {
   private readonly todoService = inject(TodoService);
   private readonly fb = inject(FormBuilder);
   
   @Input() toDoItem: ToDoItemDto | null = null;
-  @Output() close = new EventEmitter<void>();
+  close = output();
   
   toDoItemForm!: FormGroup;
   isSubmitting = signal(false);
@@ -61,7 +61,6 @@ export class TodoForm {
           assignedEmail: formValue.assignedEmail
         };
         
-      console.log(updateRequest);
         this.todoService.updateToDoItem(this.toDoItem.id, updateRequest).subscribe({
           next: () => {
             this.isSubmitting.set(false);
@@ -99,6 +98,11 @@ export class TodoForm {
 
   onCancel() {
     this.close.emit();
+  }
+
+  getMinDate() {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
   }
 
   get isEditMode(): boolean {

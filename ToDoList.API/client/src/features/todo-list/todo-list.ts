@@ -52,7 +52,6 @@ loadToDoItems() {
       console.error(error);
     },
     complete: () => {
-      console.log('complete');
     }
   });
 }
@@ -63,7 +62,6 @@ openToDoItemForm() {
 }
 
 editToDoItem(toDoItem: ToDoItemDto) {
-  console.log(toDoItem.toDoDate);
   this.selectedToDoItem.set(toDoItem);
   this.showToDoItemForm.set(true);
 }

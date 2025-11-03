@@ -65,16 +65,16 @@
     @if (totalPages() > 1) {
     <div class="flex justify-center items-center gap-4 mt-6">
         <button class="btn btn-outline" (click)="onPageChange(pageNumber() - 1)" [disabled]="pageNumber() === 0">
-            Previous
+            Poprzednia
         </button>
 
         <span class="text-sm font-medium text-gray-600">
-            Page {{ pageNumber() + 1 }} of {{ totalPages() }}
+            Strona {{ pageNumber() + 1 }} z {{ totalPages() }}
         </span>
 
         <button class="btn btn-outline" (click)="onPageChange(pageNumber() + 1)"
             [disabled]="pageNumber() === totalPages() - 1">
-            Next
+            Następna
         </button>
     </div>
     }

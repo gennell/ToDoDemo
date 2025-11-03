@@ -54,8 +54,8 @@
                         <span class="label-text">Termin wykonania *</span>
                     </div>
 
-                    <input type="date" id="toDoDate" formControlName="toDoDate" class="input input-bordered w-full"
-                        placeholder="John Doe"
+                    <input type="date" id="toDoDate" [min]="getMinDate()" formControlName="toDoDate"
+                        class="input input-bordered w-full"
                         [class.input-error]="toDoItemForm.get('toDoDate')?.invalid && toDoItemForm.get('toDoDate')?.touched" />
 
                     @if (toDoItemForm.get('toDoDate')?.invalid && toDoItemForm.get('toDoDate')?.touched) {
@@ -89,7 +89,7 @@
                     </div>
 
                     <input type="email" id="assignedEmail" formControlName="assignedEmail"
-                        placeholder="user@example.com" class="input input-bordered input-error w-full"
+                        placeholder="user@example.com" class="input input-bordered w-full"
                         [class.input-error]="toDoItemForm.get('assignedEmail')?.invalid && toDoItemForm.get('assignedEmail')?.touched" />
                     @if (toDoItemForm.get('assignedEmail')?.invalid && toDoItemForm.get('assignedEmail')?.touched) {
                     <div class="label">
@@ -98,7 +98,7 @@
                             <span>Email jest wymagany</span>
                             }
                             @if (toDoItemForm.get('assignedEmail')?.errors?.['email']) {
-                            <span>Invalid email format</span>
+                            <span>Nieprawidłowy format email</span>
                             }
                         </span>
                     </div>
@@ -107,9 +107,9 @@
             </div>
 
             <div class="flex justify-end gap-3 pt-2">
-                <button type="button" class="btn btn-ghost" (click)="onCancel()">Cancel</button>
+                <button type="button" class="btn btn-ghost" (click)="onCancel()">Anuluj</button>
                 <button type="submit" class="btn btn-primary" [disabled]="toDoItemForm.invalid || isSubmitting()">
-                    {{ isSubmitting() ? 'Saving...' : (isEditMode ? 'Update' : 'Create') }}
+                    {{ isSubmitting() ? 'Zapisywanie...' : (isEditMode ? 'Zapisz' : 'Utwórz') }}
                 </button>
             </div>
         </form>
